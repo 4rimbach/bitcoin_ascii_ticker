@@ -11,6 +11,10 @@ os.system('cls||clear')
 tprint("Good morning...")
 time.sleep(2)
 
+# Load sound effect
+pygame.mixer.init()
+sound_effect = pygame.mixer.Sound('rizz_sound.wav')  # Replace 'your_sound_file.wav' with the path to your sound file
+
 fonts = [
         "univers", #maybe actual best one
         "varsity",
@@ -25,22 +29,22 @@ fonts = [
         "dotmatrix", #good
         "epic",
         "ghost",
-        "merlin1", 
+        "merlin1",
         "modular",
-        "nvscript", 
-        "poison", 
-        "standard", 
-        "swampland", 
+        "nvscript",
+        "poison",
+        "standard",
+        "swampland",
 ]
 
 def random_walk(seed, scale):
     return seed+scale*random.uniform(-1, 1)
 
 def main():
-    font_choice = fonts[random.randrange(0,len(fonts))]
-    font_choice = "tarty8"
-    tickprice_num = 129521
+    font_choice = random.choice(fonts)
+    tickprice_num = 99900
     scale = 500
+    passed_threshold = False
     while True:
         try:
             # keys = pygame.key.get_pressed()
@@ -55,6 +59,13 @@ def main():
             print(tickprice)
             tprint(tickprice, font=font_choice)
             print(font_choice)
+
+            if tickprice_num >= 100000 and not passed_threshold:
+                sound_effect.play()  # Rizz Rizz
+                passed_threshold = True
+            elif tickprice_num < 100000:
+                passed_threshold = False
+
             time.sleep(2)
         except KeyboardInterrupt:
             try:
@@ -62,7 +73,7 @@ def main():
                 tprint("...", font=font_choice)
                 font_choice = fonts[random.randrange(0,len(fonts))]
                 time.sleep(2)
-            except:
+            except KeyboardInterrupt:
                 os.system('cls||clear')
                 tprint("Exiting...", font=font_choice)
                 print(font_choice)
