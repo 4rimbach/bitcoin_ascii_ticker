@@ -1,11 +1,14 @@
 from coinbase.websocket import WSClient
 import threading
 import json
-import time
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Replace with your API key and secret
 api_key = 'organizations/73f00023-8bb5-4758-ba5e-b63764d95792/apiKeys/ae15b8b0-24c5-409e-844b-46e4f1625981'
-api_secret = '-----BEGIN EC PRIVATE KEY-----\nMHcCAQEEIFGSVNJ9zbbmxruX4VwFL3+Ucp6UPL2PVw5kYdifFXOIoAoGCCqGSM49\nAwEHoUQDQgAEn4/7+i/EzNlbpGBFt5S0Ur0juuiRqywm9n4zuDP4UsaU/M/g/A4t\ngAE701tlt8MOUgOj60BPlgNEMuZ/teCSHQ==\n-----END EC PRIVATE KEY-----\n'
+api_secret = os.getenv('COINBASE_API_SECRET')
 
 class BitcoinPriceFetcher:
     def __init__(self, api_key, api_secret):
